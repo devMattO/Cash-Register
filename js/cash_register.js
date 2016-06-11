@@ -62,14 +62,9 @@ var operation;
         console.log('initial value inserted into total');
     });
       calModule.saveMemory();
-      console.log(calModule.recallMemory());
+      calModule.recallMemory();
 
   }
-
-
-
-
-
 
 var button_divide = document.getElementById('buttonIndex03');
 button_divide.innerHTML = '/';
@@ -156,16 +151,20 @@ button_equals.addEventListener('click', function(){
     // function operators(x){
     if(divide_tracker){
       console.log(calModule.recallMemory());
-      displayValue.innerHTML = calModule.divide(displayValue.innerHTML);
+      calModule.divide(displayValue.innerHTML);
+      displayValue.innerHTML = calModule.getTotal();
     }else if(multiply_tracker){
       console.log(calModule.recallMemory());
-      displayValue.innerHTML = calModule.multiply(displayValue.innerHTML);
+      calModule.multiply(displayValue.innerHTML);
+      displayValue.innerHTML = calModule.getTotal();
     }else if(add_tracker){
       console.log(calModule.recallMemory());
-      displayValue.innerHTML = calModule.add(displayValue.innerHTML);
+      calModule.add(displayValue.innerHTML);
+      displayValue.innerHTML = calModule.getTotal();
     }else if(subtract_tracker){
       console.log(calModule.recallMemory());
-      displayValue.innerHTML = calModule.subtract(displayValue.innerHTML);
+      calModule.subtract(displayValue.innerHTML);
+      displayValue.innerHTML = calModule.getTotal();
     }
   // }
   // console.log(operators(displayValue.innerHTML));
