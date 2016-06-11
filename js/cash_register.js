@@ -12,10 +12,10 @@ calculator.appendChild(displayValue);
 var initialState = true;
 var divisor;
 var memory = 0;
-var subtract_tracker = true;
-var add_tracker = true;
-var divide_tracker = true;
-var multiply_tracker = true;
+var subtract_tracker = false;
+var add_tracker = false;
+var divide_tracker = false;
+var multiply_tracker = false;
 
 var isDisplayEmpty = true;
 // var isWaiting = false;
@@ -73,16 +73,16 @@ var operation;
 
 var button_divide = document.getElementById('buttonIndex03');
 button_divide.innerHTML = '/';
-// button_divide = true;
 button_divide.addEventListener('click', function(){
   // if(true){
 
+  // button_divide = true;
+  divide_tracker = true;
   calModule.load(displayValue.innerHTML);
   calModule.saveMemory();
   calModule.recallMemory();
 
   initialState = true;
-  divide_tracker = false;
   // isWaiting = true;
   // }
 });
@@ -98,9 +98,12 @@ button_clear.addEventListener('click', function(){
 var button_multiply = document.getElementById('buttonIndex13');
 button_multiply.innerHTML = 'x';
 button_multiply.addEventListener('click', function(){
+  multiply_tracker = true;
   calModule.load(displayValue.innerHTML);
+  calModule.saveMemory();
+  calModule.recallMemory();
+
   initialState = true;
-  console.log(calModule.getTotal());
 });
 
 var button_getBalance = document.getElementById('buttonIndex14');
@@ -111,6 +114,14 @@ button_getBalance.addEventListener('click', function(){
 
 var button_subtract = document.getElementById('buttonIndex23');
 button_subtract.innerHTML = '-';
+button_subtract.addEventListener('click', function(){
+  subtract_tracker = true;
+  calModule.load(displayValue.innerHTML);
+  calModule.saveMemory();
+  calModule.recallMemory();
+
+  initialState = true;
+});
 var button_depositCash = document.getElementById('buttonIndex24');
 button_depositCash.innerHTML = 'deposit cash';
 button_depositCash.addEventListener('click', function(){
@@ -126,7 +137,12 @@ button_decimal.addEventListener('click', function(){
 var button_add = document.getElementById('buttonIndex33');
 button_add.innerHTML = '+';
 button_add.addEventListener('click', function(){
-  // left off right here
+  add_tracker = true;
+  calModule.load(displayValue.innerHTML);
+  calModule.saveMemory();
+  calModule.recallMemory();
+
+  initialState = true;
 });
 
 var button_withdrawCash = document.getElementById('buttonIndex34');
@@ -138,10 +154,19 @@ button_equals.innerHTML = '=';
 button_equals.addEventListener('click', function(){
 
     // function operators(x){
-    // if(button_divide === false){
+    if(divide_tracker){
       console.log(calModule.recallMemory());
       displayValue.innerHTML = calModule.divide(displayValue.innerHTML);
-  //   }
+    }else if(multiply_tracker){
+      console.log(calModule.recallMemory());
+      displayValue.innerHTML = calModule.multiply(displayValue.innerHTML);
+    }else if(add_tracker){
+      console.log(calModule.recallMemory());
+      displayValue.innerHTML = calModule.add(displayValue.innerHTML);
+    }else if(subtract_tracker){
+      console.log(calModule.recallMemory());
+      displayValue.innerHTML = calModule.subtract(displayValue.innerHTML);
+    }
   // }
   // console.log(operators(displayValue.innerHTML));
 
